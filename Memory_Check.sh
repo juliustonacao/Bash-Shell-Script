@@ -20,19 +20,24 @@ USED_MEMORY=$( free -mt | awk '/Mem:/{print $3 " MB Total Memory"}' )
 free -mt | awk '/Mem:/{print $4 " MB Total Memory "}'
 FREE_MEMORY=$( free -mt | awk '/Mem:/{print $4 " MB Total Memory"}' )
 
-## Now we have set up three variables and we can simply call them out using echo command and $variable
-## The three variables are as follows : TOTAL_MEMORY, FREE_MEMORY, USED_MEMORY. Please note that these are case sensitive
+## Checking the RAM_USAGE percentage
+RAM_USAGE=$( free -mt | awk '/Mem:/{printf(" RAM USAGE %.2f\n "), $$3/$2*100}' )
+
+## Now we have set up four variables and we can simply call them out using echo command and $variable
+## The four variables are as follows : TOTAL_MEMORY, FREE_MEMORY, USED_MEMORY, RAM_USAGE. Please note that these are case sensitive
 
 ## CONDDITIONALS: If the used memory is <60% of the TOTAL_MEMORY, do nothing
 ## exit code should be 0
 if [[ "$USED_MEMORY" -le  ]]
 
 exit 0
+fi
 
 ## CONDDITIONALS: If the used memory is >= 60% of the TOTAL_MEMORY, trigger a WARNING
 ## exit code should be 1
 
 exit 1
+fi
 
 
 ## CONDDITIONALS: If the used memory is >= 90% of the TOTAL_MEMORY, trigger a CRITICAL WARNING 
@@ -41,3 +46,8 @@ exit 1
 ## exit code should be 2
 
 exit 2
+fi
+
+
+##command for top processes
+TOPPROCESS=$(ps -eo pid -eo pcpu -eo command | sort -k 2 -r | grep -v PID | head -n 1)
