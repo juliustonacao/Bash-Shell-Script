@@ -9,15 +9,15 @@ nano memory_check.sh
 #############################################################################################
 
 ## Checking the total Memory and assigning variable
-free -m -t | Grep Mem: | awk '{print $2 " MB Total Memory "}'
+free -mt | awk '/Mem:/{print $2 " MB Total Memory "}'
 TOTAL_MEMORY=$( free -mt | awk '/Mem:/{print $2 " MB Total Memory"}' )
 
 ## Checking how much memoy is used and assigning variable
-free -m -t | Grep Mem: | awk '{print $3 " MB Total Memory "}'
+free -mt | awk '/Mem:/{print $3 " MB Total Memory "}'
 USED_MEMORY=$( free -mt | awk '/Mem:/{print $3 " MB Total Memory"}' )
 
 ## Checking how much is the free memory and assigning variable
-free -m -t | Grep Mem: | awk '{print $4 " MB Total Memory "}'
+free -mt | awk '/Mem:/{print $4 " MB Total Memory "}'
 FREE_MEMORY=$( free -mt | awk '/Mem:/{print $4 " MB Total Memory"}' )
 
 ## Now we have set up three variables and we can simply call them out using echo command and $variable
