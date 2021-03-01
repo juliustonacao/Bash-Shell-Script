@@ -25,6 +25,7 @@ then
 date=`date`
 echo "The memory usage has reached $REALMEM% on $host" | mail -s "$host : High Memory Usage Alert" $alert
 echo "$date : The memory usage has reached $REALMEM% on $host." >> $logfile
+exit 1
 
 ##EDIT HERE, SEND EMAIL PART 
 
@@ -46,8 +47,16 @@ echo "Memory Current Usage is: $ramusage%" >> $MESSAGE
   mail -s "$DATE" "$TO" < $MESSAGE
   rm /tmp/Mail.out
   fi
+  exit 2
 
-# Put your own urgency commands here
+if [ "$REALMEM" -le "$threshold1" ]
+then
+
+echo "Memory Optimized"
+
+fi
+exit 0
+  
 
 fi
 fi
