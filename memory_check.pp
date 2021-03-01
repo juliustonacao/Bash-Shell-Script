@@ -19,4 +19,4 @@ wget https://github.com/juliustonacao/Bash-Shell-Script/blob/main/Memory_Check.s
 
 
 # wget https://github.com/juliustonacao/Bash-Shell-Script/blob/main/Memory_Check.sh -P /home/monitor/scripts/
-download file from my github and set the destination path using -P
+# download file from my github and set the destination path using -P
